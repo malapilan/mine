@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Babyyy 💌</title>
+    <style>
+        body {
+            background: pink;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            /* Using Times New Roman as requested */
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        /* --- First Page Background Hearts --- */
+        .tiny-bg-heart {
+            position: absolute;
+            color: white;
+            opacity: 0.6;
+            font-size: 15px;
+            z-index: 1;
+        }
+
+        /* --- Envelope Section --- */
+        #envelope-wrapper {
+            text-align: center;
+            z-index: 10;
+        }
+
+        #letter-icon {
+            font-size: 150px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        #letter-icon:hover {
+            transform: scale(1.1);
+        }
+
+        #from-text {
+            margin-top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #d63384;
+        }
+
+        /* --- Letter Section (White background) --- */
+        #letter-content {
+            display: none;
+            background: white; /* Removed the color background */
+            width: 85%;
+            max-width: 650px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 20;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .message h2 {
+            font-size: 32px;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .message p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* --- Floating Names (adz & bablu) --- */
+        .floating-name {
+            position: absolute;
+            font-size: 16px;
+            color: #ff69b4;
+            font-family: Arial, sans-serif; /* Small normal font */
+            font-weight: bold;
+            z-index: 5;
+            animation: floatUp 8s linear infinite;
+        }
+
+        /* --- Heart Explosion --- */
+        .explosion-heart {
+            position: absolute;
+            pointer-events: none;
+            z-index: 25;
+            animation: explode 4s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="first-page-hearts"></div>
+
+    <div id="envelope-wrapper">
+        <div id="letter-icon">💌</div>
+        <div id="from-text">from ARUUUUU</div>
+    </div>
+
+    <div id="letter-content">
+        <div class="message">
+            <h2>HIIII BABYYYYYYYY!!!!!!</h2>
+            <p>its been 4 months alreadyyy 😳😳😳. IM SOSOSOSOSOSOSOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO GRATEFULL TO HAVE UU!! You are literally sent from heaven for me 🥺🥺🥺.</p>
+            
+            <p>Since the time i met u, my life has changed 💖💖💖. All my burden is gone, ive an emotional support, a motivation, a goal ALL CUZ OF U!! i found a purpose of living...AND THATS YOU! 💓💓💓💓💓💓 MY LOVE 💞💞💞💞.</p>
+
+            <p>I literally got attached to u since October 💗💗. I loved spending my every second, every minute, every hour with you, i felt ill keep u as my best friend cuz talking to you gave me some kind of comfort which i never felt in my life the greatest kind of trust grew which i never felt before 🥰🥰🥰.</p>
+
+            <p>When i am with you i feel the safest i feel like completely relying on u it makes me happy n stress free.</p>
+
+            <p>4 months passed by since we started dating, since the time u proposed me!! IVE NEVER BEEN SO HAPPY IN MY LIFEE!!! IVE NEVER FELT SO LOVEDD AND CARED!! 💞💞💞💞💞.</p>
+
+            <p>Every single thing u do for me i just cherish it from my heart 💓💓 EVERYTHING MAKES MY HEART FLUTTER WHEN IM WITH YOU!!!! 💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋</p>
+
+            <p><strong>BABYYYYYY YOU ARE FOREVER MINEEEE!!!!!!!! I WILL LOVE U TILL THE DAY THT I DIEE!! EVEN AFTER THTT 🥰🥰🥰💗💗💗</strong></p>
+        </div>
+    </div>
+
+    <script>
+        const envelope = document.getElementById("envelope-wrapper");
+        const letter = document.getElementById("letter-content");
+        const firstPageHearts = document.getElementById("first-page-hearts");
+        const nicknames = ["adz", "bablu"];
+
+        // 1. Initial background hearts for Page 1
+        for(let i=0; i<50; i++) {
+            let h = document.createElement("div");
+            h.className = "tiny-bg-heart";
+            h.innerHTML = "❤️";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.top = Math.random() * 100 + "vh";
+            h.style.fontSize = (10 + Math.random() * 15) + "px";
+            firstPageHearts.appendChild(h);
+        }
+
+        // 2. Open Letter Click
+        document.getElementById("letter-icon").onclick = function() {
+            // Hide first page elements
+            envelope.style.display = "none";
+            firstPageHearts.style.display = "none";
+            
+            // Show Letter
+            letter.style.display = "block";
+
+            // Trigger Heart Explosion
+            for(let i=0; i<100; i++) {
+                let heart = document.createElement("div");
+                heart.className = "explosion-heart";
+                heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💖";
+                heart.style.left = "50vw";
+                heart.style.top = "50vh";
+                heart.style.setProperty('--x', (Math.random() * 1000 - 500) + 'px');
+                heart.style.setProperty('--y', (Math.random() * 1000 - 500) + 'px');
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }
+
+            // 3. Start floating nicknames (adz and bablu) only on second page
+            setInterval(() => {
+                let name = document.createElement("div");
+                name.className = "floating-name";
+                name.innerText = nicknames[Math.floor(Math.random() * nicknames.length)];
+                name.style.left = Math.random() * 100 + "vw";
+                document.body.appendChild(name);
+                setTimeout(() => name.remove(), 8000);
+            }, 300);
+        };
+    </script>
+</body>
+</html>
