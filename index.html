@@ -14,17 +14,24 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
-            /* Using Times New Roman as requested */
             font-family: "Times New Roman", Times, serif;
         }
 
-        /* --- First Page Background Hearts --- */
+        /* --- Floating Background Hearts (First Page) --- */
         .tiny-bg-heart {
             position: absolute;
             color: white;
             opacity: 0.6;
-            font-size: 15px;
             z-index: 1;
+            /* Added animation for floating */
+            animation: floatBackground 10s linear infinite;
+        }
+
+        @keyframes floatBackground {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
         /* --- Envelope Section --- */
@@ -51,10 +58,10 @@
             color: #d63384;
         }
 
-        /* --- Letter Section (White background) --- */
+        /* --- Letter Section --- */
         #letter-content {
             display: none;
-            background: white; /* Removed the color background */
+            background: white;
             width: 85%;
             max-width: 650px;
             padding: 40px;
@@ -66,6 +73,24 @@
             overflow-y: auto;
             text-align: center;
             animation: fadeIn 1s ease;
+        }
+
+        /* --- Back Button --- */
+        #back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: "Times New Roman", serif;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        #back-btn:hover {
+            background: #d63384;
         }
 
         .message h2 {
@@ -86,7 +111,7 @@
             position: absolute;
             font-size: 16px;
             color: #ff69b4;
-            font-family: Arial, sans-serif; /* Small normal font */
+            font-family: Arial, sans-serif;
             font-weight: bold;
             z-index: 5;
             animation: floatUp 8s linear infinite;
@@ -143,6 +168,8 @@
             <p>Every single thing u do for me i just cherish it from my heart 💓💓 EVERYTHING MAKES MY HEART FLUTTER WHEN IM WITH YOU!!!! 💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋</p>
 
             <p><strong>BABYYYYYY YOU ARE FOREVER MINEEEE!!!!!!!! I WILL LOVE U TILL THE DAY THT I DIEE!! EVEN AFTER THTT 🥰🥰🥰💗💗💗</strong></p>
+            
+            <button id="back-btn">Visit first page</button>
         </div>
     </div>
 
@@ -151,29 +178,34 @@
         const letter = document.getElementById("letter-content");
         const firstPageHearts = document.getElementById("first-page-hearts");
         const nicknames = ["adz", "bablu"];
+        let nameInterval;
 
-        // 1. Initial background hearts for Page 1
-        for(let i=0; i<50; i++) {
-            let h = document.createElement("div");
-            h.className = "tiny-bg-heart";
-            h.innerHTML = "❤️";
-            h.style.left = Math.random() * 100 + "vw";
-            h.style.top = Math.random() * 100 + "vh";
-            h.style.fontSize = (10 + Math.random() * 15) + "px";
-            firstPageHearts.appendChild(h);
+        // 1. Create floating background hearts for Page 1
+        function createBgHearts() {
+            firstPageHearts.innerHTML = ""; // Clear existing
+            for(let i=0; i<40; i++) {
+                setTimeout(() => {
+                    let h = document.createElement("div");
+                    h.className = "tiny-bg-heart";
+                    h.innerHTML = "❤️";
+                    h.style.left = Math.random() * 100 + "vw";
+                    h.style.animationDuration = (5 + Math.random() * 10) + "s";
+                    h.style.fontSize = (15 + Math.random() * 20) + "px";
+                    firstPageHearts.appendChild(h);
+                }, i * 200); // Staggered start
+            }
         }
+
+        createBgHearts();
 
         // 2. Open Letter Click
         document.getElementById("letter-icon").onclick = function() {
-            // Hide first page elements
             envelope.style.display = "none";
             firstPageHearts.style.display = "none";
-            
-            // Show Letter
             letter.style.display = "block";
 
             // Trigger Heart Explosion
-            for(let i=0; i<100; i++) {
+            for(let i=0; i<80; i++) {
                 let heart = document.createElement("div");
                 heart.className = "explosion-heart";
                 heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💖";
@@ -185,15 +217,24 @@
                 setTimeout(() => heart.remove(), 4000);
             }
 
-            // 3. Start floating nicknames (adz and bablu) only on second page
-            setInterval(() => {
+            // Start floating names
+            nameInterval = setInterval(() => {
                 let name = document.createElement("div");
                 name.className = "floating-name";
                 name.innerText = nicknames[Math.floor(Math.random() * nicknames.length)];
                 name.style.left = Math.random() * 100 + "vw";
                 document.body.appendChild(name);
                 setTimeout(() => name.remove(), 8000);
-            }, 300);
+            }, 400);
+        };
+
+        // 3. Back Button Click
+        document.getElementById("back-btn").onclick = function() {
+            letter.style.display = "none";
+            envelope.style.display = "block";
+            firstPageHearts.style.display = "block";
+            clearInterval(nameInterval); // Stop floating names on page 1
+            createBgHearts(); // Restart floating hearts
         };
     </script>
 </body>
